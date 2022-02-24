@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.srijit.timer.MainViewModel" />
+        <import type="android.view.View"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <ProgressBar
+            android:id="@+id/timer_progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:progress="0"
+            android:max="100"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/circular"
+            android:indeterminate="false"
+            android:visibility="@{vm.isTimerRunning()? View.VISIBLE: View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/time_spinner"
+            android:layout_width="wrap_content"
+            android:visibility="@{vm.isTimerRunning()? View.GONE: View.VISIBLE}"
+            android:entries="@array/time_array"
+            app:layout_constraintTop_toTopOf="@id/timer_progress"
+            app:layout_constraintBottom_toBottomOf="@id/timer_progress"
+            app:layout_constraintStart_toStartOf="@id/timer_progress"
+            app:layout_constraintEnd_toEndOf="@id/timer_progress"
+            android:layout_height="100dp"/>
+
+        <TextView
+            android:id="@+id/tv_timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:visibility="@{vm.isTimerRunning()? View.VISIBLE: View.GONE}"
+            app:layout_constraintTop_toTopOf="@id/timer_progress"
+            app:layout_constraintBottom_toBottomOf="@id/timer_progress"
+            app:layout_constraintStart_toStartOf="@id/timer_progress"
+            app:layout_constraintEnd_toEndOf="@id/timer_progress"/>
+
+
+        <Button
+            android:id="@+id/bt_timer_toggle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_curved"
+            android:textColor="@color/white"
+            android:text="@{vm.isTimerRunning() ? @string/stop : @string/start }"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
